@@ -1,0 +1,8 @@
+<div class="container">
+    <h2 mat-dialog-title>{{title()}}</h2>
+    <div [innerHTML]="description()" class="description"></div>
+
+    <div class="buttons">
+        <button mat-flat-button color="primary" (click)="onClose()">Aceptar</button>
+    </div>
+</div>

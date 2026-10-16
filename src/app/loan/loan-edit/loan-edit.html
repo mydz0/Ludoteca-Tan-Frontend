@@ -1,0 +1,56 @@
+<div class="container">
+    @if (id()) {
+    <h1>Modificar préstamo</h1>
+    } @else {
+    <h1>Crear préstamo</h1>
+    }
+
+    <form>
+        <mat-form-field>
+            <mat-label>Identificador</mat-label>
+            <input type="text" matInput placeholder="Identificador" [(ngModel)]="id" name="id" disabled>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Cliente</mat-label>
+            <mat-select disableRipple [(ngModel)]="client" name="client" required>
+                @for (c of clients(); track c.id) {
+                <mat-option [value]="c">{{c.name}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Juego</mat-label>
+            <mat-select disableRipple [(ngModel)]="game" name="game" required>
+                @for (g of games(); track g.id) {
+                <mat-option [value]="g">{{g.title}}</mat-option>
+                }
+            </mat-select>
+
+        </mat-form-field>
+
+        <label for="date-label">Fechas de préstamo</label>
+        <div class="dates">
+            <mat-form-field>
+                <input matInput [matDatepicker]="startPicker" matInput placeholder="Fecha préstamo" [(ngModel)]="startDate"
+                    name="startDate" required>
+                <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                <mat-datepicker #startPicker></mat-datepicker>
+                <mat-error>La fecha no puede estar vacía</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [matDatepicker]="endPicker" matInput placeholder="Fecha devolución" [(ngModel)]="endDate"
+                    name="endDate" required>
+                <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+                <mat-datepicker #endPicker></mat-datepicker>
+                <mat-error>La fecha no puede estar vacía</mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+
+    <div class="buttons">
+        <button mat-stroked-button (click)="onClose()">Cerrar</button>
+        <button mat-flat-button color="primary" (click)="onSave()">Guardar</button>
+    </div>
+</div>
